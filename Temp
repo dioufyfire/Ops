@@ -1,0 +1,13 @@
+[workers]
+10.100.116.11 ansible_user=root ansible_ssh_pass=Adm/Exi/Lx1 
+10.100.116.13 ansible_user=root ansible_ssh_pass=Adm/Exi/Lx1 
+10.100.116.41 ansible_user=root ansible_ssh_pass=sonatel
+[master]
+10.100.116.10 ansible_user=root ansible_ssh_pass=Adm/Exi/Lx1
+
+[fronts]
+10.100.116.10 ansible_user=root ansible_ssh_pass=Adm/Exi/Lx1
+
+
+[adm]
+10.137.16.51 ansible_user=root ansible_ssh_pass=Adm/Exi/Lx1

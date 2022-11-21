@@ -1,22 +1,5 @@
 # Solr Commands
-
-https://bhagadepravin.github.io/commands/solr
-
-- [Delete Collections](https://github.com/bhagadepravin/commands/blob/master/solr.md#delete-collections)
-- [download config](https://github.com/bhagadepravin/commands/blob/master/solr.md#download-ambariinfra-config)
-- [Upload AmbariInfra config](https://github.com/bhagadepravin/commands/blob/master/solr.md#upload-ambariinfra-config)
-- [Solr corruption](https://github.com/bhagadepravin/commands/blob/master/solr.md#solr-corruption)
-- [Enable Heap dump](https://github.com/bhagadepravin/commands/blob/master/solr.md#enable-heap-dump)
-- [Kerberos Debug](https://github.com/bhagadepravin/commands/blob/master/solr.md#kerberos-debug)
-- [Solr Triage](https://github.com/bhagadepravin/commands/blob/master/solr.md#solr-triage)
-- [Set TTL value:](https://github.com/bhagadepravin/commands/blob/master/solr.md#set-ttl-value)
-- [Enabled Audit provider summary for services.](https://github.com/bhagadepravin/commands/blob/master/solr.md#enabled-audit-provider-summary-for-services)
-- [Create the collection](https://github.com/bhagadepravin/commands/blob/master/solr.md#create-the-collection)
-- [Deleting Indexed Data](https://github.com/bhagadepravin/commands/blob/master/solr.md#deleting-indexed-data)
-- [Archiving Indexed Data](https://github.com/bhagadepravin/commands/blob/master/solr.md#archiving-indexed-data)
-- [Saving Indexed Data](https://github.com/bhagadepravin/commands/blob/master/solr.md#saving-indexed-data)
-- [Configuring Solr for Ranger](https://github.com/bhagadepravin/commands/blob/master/solr.md#configuring-solr-for-ranger)
-====================================================================================
+infra-solr-data-manager --mode=delete --solr-keytab=/etc/security/keytabs/ambari-infra-solr.service.keytab --solr-principal=infra-solr/mespmasterprd3.orange-sonatel.com@BIGDATA --solr-url=http://mespmasterprd3.orange-sonatel.com:8886/solr --collection=ranger_audits --filter-field=evtTime --days=30
                                                                                      
 For a Kerberos env kinit with Ambari Infra keytab
 ## Kinit with Ambari Infra keytab
