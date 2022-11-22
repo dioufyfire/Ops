@@ -16,3 +16,16 @@ host IP_ADDRESS -> Reverse IP lookup
 
 ## STAORAGE
 du -a /mysql --exclude=/{proc,sys,dev} |  sort -n -r | head -n 20  
+
+
+## VAR_ENV
+printenv
+printenv SHELL
+set -> variables de shell, variables d’environnement, variables locales et fonctions de shell
+export TEST_VAR
+unset TEST_VAR
+
+## SYSTEM
+Kernel version
+- uname -r
+- cat /proc/version

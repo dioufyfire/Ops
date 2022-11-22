@@ -1,0 +1,7 @@
+- name: Gathering Service Facts
+  service_facts:
+  tags: firewalld ## filter
+
+- name: report the synchronisation state of the NTP daemon
+  shell: ntpstat
+  register: result

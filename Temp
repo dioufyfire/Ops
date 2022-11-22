@@ -1,13 +1,31 @@
-[workers]
-10.100.116.11 ansible_user=root ansible_ssh_pass=Adm/Exi/Lx1 
-10.100.116.13 ansible_user=root ansible_ssh_pass=Adm/Exi/Lx1 
-10.100.116.41 ansible_user=root ansible_ssh_pass=sonatel
-[master]
-10.100.116.10 ansible_user=root ansible_ssh_pass=Adm/Exi/Lx1
+hdparm -t --direct /dev/sda1
 
-[fronts]
-10.100.116.10 ansible_user=root ansible_ssh_pass=Adm/Exi/Lx1
+dd bs=1M count=1024 if=/dev/zero of=/data/01/tmpfile oflag=direct conv=fdatasync
+
+CDP_SONATEL_ORANGE_SN
+
+adduser diop028920 -u 9017
+usermod -s /bin/false diop028920
+cat /etc/passwd | grep "diop028920"
+cat /etc/group | grep diop028920
 
 
-[adm]
-10.137.16.51 ansible_user=root ansible_ssh_pass=Adm/Exi/Lx1
+kadmin.local -q 'addprinc -pw sonatel221 diop028920@BIGDATADEV' && kadmin.local -q 'xst -norandkey -k diop028920.keytab diop028920"@BIGDATADEV'
+
+hdfs -c 'kinit -kt /etc/security/keytabs/hdfs.headless.keytab hdfs-bigdatadev@BIGDATADEV' && hdfs -c 'hdfs dfs -mkdir /user/tmp_pene64484' && hdfs -c 'hdfs dfs -chown tmp_pene64484:tmp_pene64484 /user/tmp_pene64484' 
+
+curl -ikv --negotiate -u: "http://$(hostname -f):8886/solr/ranger_audits/update?commit=true" -H "Content-Type: text/xml" --data-binary "<delete><query>evtTime:[* TO NOW-15DAYS]</query></delete>"
+
+infra-solr-data-manager -m delete -s ://$(hostname -f):8886/solr -c hadoop_logs -f logtime -e 2022-10-01T02:00:00.000Z
+
+http://$(hostname -f)/solr/core/update?stream.body=<delete><query>*:*</query></delete>&commit=true
+
+infra-solr-data-manager --mode=delete --solr-keytab=/etc/security/keytabs/ambari-infra-solr.service.keytab --solr-principal=infra-solr/mespmasterprd1.orange-sonatel.com@BIGDATA --solr-url=http://mespmasterprd1.orange-sonatel.com:8886/solr --collection=ranger_audits --filter-field=evtTime --days=30
+
+
+java -cp /usr/lib/ambari-infra-solr/server/solr-webapp/webapp/WEB-INF/lib/lucene-core-7.7.2.jar
+
+java -cp /usr/lib/ambari-infra-solr/server/solr-webapp/webapp/WEB-INF/lib/lucene-core-5.5.2.jar org.apache.lucene.index.CheckIndex INDEX_DATA_PATH
+
+kinit -kt /etc/security/keytabs/ambari-infra-solr.service.keytab infra-solr/mespmasterprd2.orange-sonatel.com@BIGDATA 
+infra-solr-data-manager --mode=delete --solr-keytab=/etc/security/keytabs/ambari-infra-solr.service.keytab --solr-principal=infra-solr/mespmasterprd3.orange-sonatel.com@BIGDATA --solr-url=http://mespmasterprd3.orange-sonatel.com:8886/solr --collection=ranger_audits --filter-field=evtTime --days=30
