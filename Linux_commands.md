@@ -14,7 +14,7 @@ chsh -s /bin/false username -> Alternative
 curl ifconfig.me -> IP Public
 host IP_ADDRESS -> Reverse IP lookup
 
-## STAORAGE
+## STORAGE
 du -a /mysql --exclude=/{proc,sys,dev} |  sort -n -r | head -n 20  
 
 
@@ -29,3 +29,18 @@ unset TEST_VAR
 Kernel version
 - uname -r
 - cat /proc/version
+lspci : List all PCI devices.
+lshw : Linux identify Ethernet interfaces and NIC hardware.
+dmidecode : List all hardware data from BIOS.
+ifconfig : Outdated network config utility.
+ip : Recommended new network config utility.
+hwinfo : Probe Linux for network cards.
+ethtool : See NIC/card driver and settings on Linux
+
+## PROCEESS
+ps aux | egrep '(apache|httpd)'
+
+## FILES
+echo OUTPUT | grep -iA 4 vendor  -> filter 4 lines after match "vendor"
+find / -type d -name "knox" 2>/dev/null
+
